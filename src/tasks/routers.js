@@ -20,6 +20,7 @@ router.post(
       .exists()
       .isInt({ gt: 0, lt: 6 })
       .withMessage("invalid priority"),
+    body("userId").exists().isInt().withMessage("invalid id").bail().toInt(),
   ],
   validationResultMiddleware,
   createTaskController

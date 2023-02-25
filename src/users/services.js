@@ -1,11 +1,29 @@
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
+
 export const createUser = async (data) => {
-    return data
-}
+  return await prisma.user.create({
+    data,
+  });
+};
 
 export const login = async (username) => {
-    return username
-}
+  return username;
+};
 
 export const getUser = async (id) => {
-    return id
-}
+  return await prisma.user.findUnique({
+    where: {
+      id,
+    },
+    include: {
+      tasks: true,
+      _count: {
+        select: {
+          tasks: true,
+        },
+      },
+    },
+  });
+};

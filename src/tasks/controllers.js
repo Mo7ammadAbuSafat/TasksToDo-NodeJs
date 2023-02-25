@@ -23,7 +23,7 @@ export const createTaskController = async (req, res, next) => {
 
 export const getTasksController = async (req, res) => {
   try {
-    const data = await getTasks(req.user.id);
+    const data = await getTasks();
     res.send({
       success: true,
       data,
